@@ -14,3 +14,6 @@ __azurite_db*__.json
 
 /target
 handler
+
+#MacOS
+.DS_Store
