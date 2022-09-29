@@ -9,9 +9,11 @@ async fn main() -> () {
     let example1 = warp::get()
         .and(warp::path("api"))
         .and(warp::path("get-prerender"))
-        .map(||  match prerender() {
+        .map(|| match prerender() {
             Ok(it) => Response::builder().body(it),
-            Err(err) => Response::builder().status(500).body(err.to_string().to_owned()),
+            Err(err) => Response::builder()
+                .status(500)
+                .body(err.to_string().to_owned()),
         });
 
     let port_key = "FUNCTIONS_CUSTOMHANDLER_PORT";
@@ -23,12 +25,15 @@ async fn main() -> () {
     warp::serve(example1).run((Ipv4Addr::LOCALHOST, port)).await
 }
 
-fn prerender() -> Result<String, anyhow::Error>  {
+fn prerender() -> Result<String, anyhow::Error> {
     let options = LaunchOptions::default_builder()
         .build()
         .expect("Couldn't find appropriate Chrome binary.");
     let browser = Browser::new(options)?;
     let tab = browser.wait_for_initial_tab()?;
-    let content = tab.navigate_to("https://www.sotrusty.com/").unwrap().wait_until_navigated().unwrap().get_content()?;
+    let navigator = tab
+        .navigate_to("https://www.sotrusty.com/")?;
+    let navigated = navigator.wait_until_navigated()?;
+    let content = navigated.get_content()?;
     return Ok(content);
 }
