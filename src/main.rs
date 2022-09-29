@@ -5,14 +5,14 @@ use warp::{http::Response, Filter};
 use headless_chrome::{Browser, LaunchOptions};
 
 #[tokio::main]
-async fn main() {
+async fn main() -> () {
     let example1 = warp::get()
         .and(warp::path("api"))
         .and(warp::path("get-prerender"))
-        .map(|| Response::builder().body( match prerender() {
-            Ok(it) => it,
-            Err(err) => err.to_string().to_owned(),
-        }));
+        .map(||  match prerender() {
+            Ok(it) => Response::builder().body(it),
+            Err(err) => Response::builder().status(500).body(err.to_string().to_owned()),
+        });
 
     let port_key = "FUNCTIONS_CUSTOMHANDLER_PORT";
     let port: u16 = match env::var(port_key) {
