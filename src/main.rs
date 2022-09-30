@@ -29,11 +29,12 @@ fn prerender() -> Result<String, anyhow::Error> {
     let options = LaunchOptions::default_builder()
         .build()
         .expect("Couldn't find appropriate Chrome binary.");
-    let browser = Browser::new(options)?;
-    let tab = browser.wait_for_initial_tab()?;
-    let navigator = tab
-        .navigate_to("https://www.sotrusty.com/")?;
-    let navigated = navigator.wait_until_navigated()?;
-    let content = navigated.get_content()?;
+
+    let content = Browser::new(options)?
+        .wait_for_initial_tab()?
+        .navigate_to("https://www.sotrusty.com/")?
+        .wait_until_navigated()?
+        .get_content()?;
+        
     return Ok(content);
 }
