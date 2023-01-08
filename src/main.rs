@@ -41,12 +41,12 @@ fn load_config() -> Config {
 }
 
 fn render_path(
-    param: String,
+    target: String,
     element: String,
     is_http: bool,
     is_headless: bool,
 ) -> Result<Response<String>, warp::http::Error> {
-    return match prerender(param, element, is_http, is_headless) {
+    return match prerender(target, element, is_http, is_headless) {
         Ok(it) => Response::builder().body(it),
         Err(err) => Response::builder()
             .status(500)
@@ -55,7 +55,7 @@ fn render_path(
 }
 
 fn prerender(
-    path: String,
+    target: String,
     element: String,
     is_http: bool,
     is_headless: bool,
@@ -65,7 +65,7 @@ fn prerender(
         .build()
         .expect("Couldn't find appropriate Chrome binary.");
 
-    let url = &(if is_http { "http://" } else { "https://" }.to_owned() + path.as_str());
+    let url = &(if is_http { "http://" } else { "https://" }.to_owned() + target.as_str());
     println!("Fetching {}", &url);
     let browser = Browser::new(options)?;
     let tab = &browser.wait_for_initial_tab()?;
