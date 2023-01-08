@@ -8,7 +8,7 @@
       "methods": [
         "get"
       ],
-      "route": "prerender/{*url}"
+      "route": "prerender/{url}/{element?}/{http?}"
     },
     {
       "type": "http",
