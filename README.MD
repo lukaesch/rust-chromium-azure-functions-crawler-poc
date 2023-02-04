@@ -25,4 +25,4 @@ Learnings:
 - Using Rust instead of JavaScript (Node.js) on Azure Functions reduces cold-start times by nearly 10x. This maybe reasoned by the very small build size of  11MB (not even using release target to build the executable).
 - Azure Functions custom handler support allowed us to make the actual crawler/scraper independent from Azure Functions. There are no code dependencies and therefore no vendor-lockin. You can run the Rust app baremetal or in a container as well!
 - Rust is still not first-class citizen of Azure Functions. Cloudflare Workers is [supporting it officially](https://blog.cloudflare.com/workers-rust-sdk/) 
-- Bigger websites use fingerprinting techniques and block datacenter IP blocks to prevent being crawled.
+- Bigger websites use fingerprinting techniques and block datacenter IP blocks to prevent being crawled (you can use Residential Proxies to make detection harder)
