@@ -4,7 +4,7 @@ A PoC to verify the performance of a crawler/scraper built in Rust and a Headles
 Note:
 This is just a PoC and far from being production-ready. I just wanted to quickly verify the idea of using Azure Functions and Rust to build a simple crawler to return the HTML DOM of websites. I hope it is useful for someone. PRs/Forks are welcome.
 
-I explained the whole idea in this [video](https://www.youtube.com/watch?v=f6t7XnS3Rbs) (Please like and subscribe if is useful :) )
+I explained the whole idea in this [video](https://www.youtube.com/watch?v=f6t7XnS3Rbs) (Please like and subscribe if it's useful to you :) )
 
 How to run:
 - Follow the steps on the [Azure Functions Deployment Guide for Rust](https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-other?tabs=rust%2Cmacos)
